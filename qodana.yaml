@@ -1,0 +1,24 @@
+version: "1.0"
+
+bootstrap: |
+  dotnet restore
+  dotnet test --collect:"XPlat Code Coverage" --results-directory .qodana/code-coverage --settings coverlet.runsettings
+
+profile:
+  name: qodana.recommended
+  inspections:
+  - group: ALL
+    ignore:
+      - "scope#file:**/*.html"
+      - "scope#file:**/*.mstemplate.html"
+
+coverage:
+  reportProblems: false
+
+include:
+  - name: All
+
+exclude:
+  - name: All
+    paths:
+      - Jellyfin.Server/wwwroot
